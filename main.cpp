@@ -18,6 +18,7 @@
 #include <sstream>
 #include <vector>
 #include <iostream>
+#include <fstream>
 #include <array>
 #include <chrono>
 #include "Board.h"
@@ -72,24 +73,43 @@ int main(int argc, char** argv)
     size_t width = 50;
 
     signal(SIGSEGV, handler); // install our handler
-
     Trie dict("dict.txt");
 
-    Result res;
-    size_t avg = 0;
-    for(int i = 0; i < 10; i++)
-    {
-        std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+//    std::ifstream t("board.txt");
+//    std::string str((std::istreambuf_iterator<char>(t)),
+//                    std::istreambuf_iterator<char>());
+//    size_t avg = 0;
+//    for(int i = 0; i < 10; i++)
+//    {
+//        std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+//
+//        Board brd(str, width, height);
+//
+//        std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+//        avg += std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+//    }
+//
+//    std::cout << "Load time: " << avg / 10 << std::endl;
+//    
+//    Board brd(str, width, height);
+//    Result res = brd.Solve(dict);
+//    PrintResuslts(res);
 
-        Board brd(test2, width, height);
-        res = brd.Solve(dict);
-
-        std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
-        avg += std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
-    }
-
-    std::cout << "Solve time: " << avg / 10 << std::endl;
-    PrintResuslts(res);
+        Result res;
+        size_t avg = 0;
+        for(int i = 0; i < 10; i++)
+        {
+            std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+    
+            Board brd(test2, width, height);
+            res = brd.Solve(dict);
+    
+            std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+            avg += std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+        }
+    
+        std::cout << "Solve time: " << avg / 10 << std::endl;
+        PrintResuslts(res);
 
     return 0;
 }

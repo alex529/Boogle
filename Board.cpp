@@ -36,56 +36,95 @@ static void InitNeighbours(std::vector<std::unique_ptr<Letter>>&brd,
                            unsigned width,
                            unsigned height)
 {
-    unsigned xStart, yStart;
-    long unsigned xStop, yStop;
-    for(size_t i = 0; i < brd.size(); i++)
+    size_t w = width - 1;
+    size_t h = height - 1;
+    size_t x = 0;
+    size_t y = 0;
+
+    //main
+    for(size_t i = 1; i < w; i++)
     {
-        xStart = brd[i]->x - 1;
-
-        if(xStart > brd[i]->x)//overflow
+        for(size_t j = 1; j < h; j++)
         {
-            xStart = 0;
-        }
-        xStop = brd[i]->x + 1;
-        if(xStop == width)
-        {
-            xStop = width - 1;
-        }
-        yStart = brd[i]->y - 1;
-        if(yStart > brd[i]->y)//overflow
-        {
-            yStart = 0;
-        }
-        yStop = brd[i]->y + 1;
-        if(yStop == height)
-        {
-            yStop = height - 1;
-        }
-
-        size_t index=0;
-        for(unsigned k = xStart; k <= xStop; k++)
-        {
-            for(unsigned j = yStart; j <= yStop; j++)
-            {
-                if(k == brd[i]->x && j == brd[i]->y)
-                {
-                    continue;
-                }
-                brd[i]->neighbours[index++] = brd[k + j * width].get();
-            }
+            brd[i + j * width].get()->neighbours[0] = brd[(i - 1) + ((j - 1) * width)].get();
+            brd[i + j * width].get()->neighbours[1] = brd[(i 	) + ((j - 1) * width)].get();
+            brd[i + j * width].get()->neighbours[2] = brd[(i + 1) + ((j - 1) * width)].get();
+            brd[i + j * width].get()->neighbours[3] = brd[(i - 1) + ( j      * width)].get();
+            brd[i + j * width].get()->neighbours[4] = brd[(i + 1) + ( j 	 * width)].get();
+            brd[i + j * width].get()->neighbours[5] = brd[(i - 1) + ((j + 1) * width)].get();
+            brd[i + j * width].get()->neighbours[6] = brd[(i 	) + ((j + 1) * width)].get();
+            brd[i + j * width].get()->neighbours[7] = brd[(i + 1) + ((j + 1) * width)].get();
         }
     }
+
+    //top & bottom
+    x = 0;
+    y = h;
+    for(size_t i = 1; i < w; i++)
+    {
+        brd[i + x * width].get()->neighbours[0] = brd[(i - 1) + ( x      * width)].get();
+        brd[i + x * width].get()->neighbours[1] = brd[(i + 1) + ( x 	 * width)].get();
+        brd[i + x * width].get()->neighbours[2] = brd[(i - 1) + ((x + 1) * width)].get();
+        brd[i + x * width].get()->neighbours[3] = brd[(i 	) + ((x + 1) * width)].get();
+        brd[i + x * width].get()->neighbours[4] = brd[(i + 1) + ((x + 1) * width)].get();
+
+        brd[i + y * width].get()->neighbours[0] = brd[(i - 1) + ((y - 1) * width)].get();
+        brd[i + y * width].get()->neighbours[1] = brd[(i 	) + ((y - 1) * width)].get();
+        brd[i + y * width].get()->neighbours[2] = brd[(i + 1) + ((y - 1) * width)].get();
+        brd[i + y * width].get()->neighbours[3] = brd[(i - 1) + ( y      * width)].get();
+        brd[i + y * width].get()->neighbours[4] = brd[(i + 1) + ( y 	 * width)].get();
+    }
+    //left && right
+    x = 0;
+    y = w;
+    for(size_t j = 1; j < h; j++)
+    {
+        brd[x + j * width].get()->neighbours[0] = brd[(x 	) + ((j - 1) * width)].get();
+        brd[x + j * width].get()->neighbours[1] = brd[(x + 1) + ((j - 1) * width)].get();
+        brd[x + j * width].get()->neighbours[2] = brd[(x + 1) + ( j 	 * width)].get();
+        brd[x + j * width].get()->neighbours[3] = brd[(x 	) + ((j + 1) * width)].get();
+        brd[x + j * width].get()->neighbours[4] = brd[(x + 1) + ((j + 1) * width)].get();
+
+        brd[y + j * width].get()->neighbours[0] = brd[(y - 1) + ((j - 1) * width)].get();
+        brd[y + j * width].get()->neighbours[1] = brd[(y 	) + ((j - 1) * width)].get();
+        brd[y + j * width].get()->neighbours[2] = brd[(y - 1) + ( j      * width)].get();
+        brd[y + j * width].get()->neighbours[3] = brd[(y - 1) + ((j + 1) * width)].get();
+        brd[y + j * width].get()->neighbours[4] = brd[(y 	) + ((j + 1) * width)].get();
+    }
+    size_t i, j;
+
+    i = j = 0;
+    brd[i + j * width].get()->neighbours[0] = brd[(i + 1) + ( j 	 * width)].get();
+    brd[i + j * width].get()->neighbours[1] = brd[(i 	) + ((j + 1) * width)].get();
+    brd[i + j * width].get()->neighbours[2] = brd[(i + 1) + ((j + 1) * width)].get();
+
+    i = w;
+    j = 0;
+    brd[i + j * width].get()->neighbours[0] = brd[(i - 1) + ( j      * width)].get();
+    brd[i + j * width].get()->neighbours[1] = brd[(i - 1) + ((j + 1) * width)].get();
+    brd[i + j * width].get()->neighbours[2] = brd[(i 	) + ((j + 1) * width)].get();
+
+    i = w;
+    j = h;
+    brd[i + j * width].get()->neighbours[0] = brd[(i - 1) + ((j - 1) * width)].get();
+    brd[i + j * width].get()->neighbours[1] = brd[(i 	) + ((j - 1) * width)].get();
+    brd[i + j * width].get()->neighbours[2] = brd[(i - 1) + ( j      * width)].get();
+
+    i = 0;
+    j = w;
+    brd[i + j * width].get()->neighbours[0] = brd[(i 	) + ((j - 1) * width)].get();
+    brd[i + j * width].get()->neighbours[1] = brd[(i + 1) + ((j - 1) * width)].get();
+    brd[i + j * width].get()->neighbours[2] = brd[(i + 1) + ( j 	 * width)].get();
 }
 
-
-Board::Board(const char* board, unsigned width, unsigned height):
+Board::Board(const std::string& board, size_t width, size_t height):
     width{width},
 height{height}
 {
     size_t len = width* height;
     for(size_t i = 0; i < len; i++)
     {
-        brd.emplace_back(std::move(std::make_unique<Letter>(board[i], i / width, i % width)));
+        brd.emplace_back(std::make_unique<Letter>(board[i], i / width, i % width));
     }
 
     InitNeighbours(brd, width, height);
@@ -148,12 +187,12 @@ void Board::FindWords(std::vector<Letter*> start,
         case Trie::TrieResult::PREFIX_FOUND:
             for(auto n: start.back()->neighbours)
             {
-                if(n == nullptr )
+                if(n == nullptr)
                     break;
 
                 if(visited[index(n)])
                     continue;
-                
+
                 visited[index(n)] = true;
                 start.push_back(n);
                 FindWords(start, dict, solution, visited);
@@ -176,7 +215,7 @@ Result Board::Solve(const Trie& dict)
     {
         results.emplace_back(tp.enqueue([this, &dict, &res, i]
         {
-            auto visited = std::make_unique<bool[]>(width*height);
+            auto visited = std::make_unique<bool[]>(width * height);
             std::vector<Letter*> word;
             word.reserve(6);
 

@@ -42,7 +42,7 @@ public:
      * @param width Used to specify the width of the board.
      * @param height Used to specify the height of the board.
      */
-    Board(const char* board, unsigned width, unsigned height);
+    Board(const std::string& board, size_t width, size_t height);
 
     /**
      * Solves the Boggle game.
