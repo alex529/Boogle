@@ -1,0 +1,66 @@
+///*
+// * To change this license header, choose License Headers in Project Properties.
+// * To change this template file, choose Tools | Templates
+// * and open the template in the editor.
+// */
+//
+///* 
+// * File:   Boggle.h
+// * Author: s134622
+// *
+// * Created on 13. februar 2017, 20:17
+// */
+//
+//#ifndef BOGGLE_H
+//#define BOGGLE_H
+//
+//#include <vector>
+//#include "Letter.h"
+//
+//class Results {
+//public:
+//    Results() : Count{0}, Score{0}, score{0}
+//    {
+//    }
+//    Results(const Results& orig);
+//    //    virtual ~Results();
+//    const char* const* Words; // pointers to unique found words, each terminated by a non-alpha char
+//    unsigned Count; // number of words found
+//    unsigned Score; // total score
+//    void* UserData; // ignored
+//    std::vector<std::vector<Letter*>> words;
+//    size_t score;
+//private:
+//
+//};
+//
+////struct Results {
+////    const char* const* Words; // pointers to unique found words, each terminated by a non-alpha char
+////    unsigned Count; // number of words found
+////    unsigned Score; // total score
+////    void* UserData; // ignored
+////    std::vector<std::vector<Letter*>> words;
+////    size_t score;
+////};
+//
+//class ResultHelper {
+//public:
+//    ResultHelper() : size{0}, count{0}, point{nullptr}
+//    {
+//    }
+//    unsigned size;
+//    unsigned count;
+//    char* point;
+//};
+//
+//// input dictionary is a file with one word per line
+//void LoadDictionary(const char* path); // << TODO
+//void FreeDictionary(); // << TODO
+//
+//// `board` will be exactly `width` * `height` chars, and char 'q' represents the 'qu' Boggle cube
+//Results FindWords(const char* board, unsigned width, unsigned height); // << TODO
+//// `results` is identical to what was returned from `FindWords`
+//void FreeWords(Results results); // << TODO
+//
+//#endif /* BOGGLE_H */
+//
