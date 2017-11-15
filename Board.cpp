@@ -169,7 +169,7 @@ void Board::FindWords(std::vector<Letter*> start,
 Result Board::Solve(const Trie& dict)
 {
     Result res;
-    ThreadPool tp{std::thread::hardware_concurrency()};
+    ThreadPool tp{std::thread::hardware_concurrency()*2};
     std::vector< std::future<void> > results;
 
     for(size_t i = 0; i < brd.size(); ++i)
