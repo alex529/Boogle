@@ -16,6 +16,8 @@
 
 #include <string>
 #include <memory>
+#include <vector>
+
 #include "Node.h"
 #include "Letter.h"
 

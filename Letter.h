@@ -15,7 +15,7 @@
 #define LETTER_H
 
 #include <string>
-#include <vector>
+#include <array>
 #include <memory>
 
 /**
@@ -35,14 +35,14 @@ public:
     x{x},
     y{y}
     {
-        neighbours.reserve(8);
+        neighbours.fill(nullptr);
     }
     Letter() :
     val{' '},
     x{0},
     y{0}
     {
-        neighbours.reserve(8);
+        neighbours.fill(nullptr);
     }
 
     //    std::string ToString() {
@@ -60,7 +60,7 @@ public:
      * During the backtracking algorithm this is set to true if the letter is 
      * part of a word.
      */
-    std::vector<Letter*> neighbours;
+    std::array<Letter*,8> neighbours;
 private:
 
 };

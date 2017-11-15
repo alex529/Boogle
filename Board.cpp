@@ -62,6 +62,7 @@ static void InitNeighbours(std::vector<std::unique_ptr<Letter>>&brd,
             yStop = height - 1;
         }
 
+        size_t index=0;
         for(unsigned k = xStart; k <= xStop; k++)
         {
             for(unsigned j = yStart; j <= yStop; j++)
@@ -70,7 +71,7 @@ static void InitNeighbours(std::vector<std::unique_ptr<Letter>>&brd,
                 {
                     continue;
                 }
-                brd[i]->neighbours.push_back(brd[k + j * width].get());
+                brd[i]->neighbours[index++] = brd[k + j * width].get();
             }
         }
     }
@@ -148,10 +149,12 @@ void Board::FindWords(std::vector<Letter*> start,
         case Trie::TrieResult::PREFIX_FOUND:
             for(auto n: start.back()->neighbours)
             {
+                if(n == nullptr )
+                    break;
+
                 if(visited[index(n)])
-                {
                     continue;
-                }
+                
                 visited[index(n)] = true;
                 start.push_back(n);
                 FindWords(start, dict, solution, visited);
