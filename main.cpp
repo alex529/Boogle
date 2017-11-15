@@ -44,25 +44,9 @@ void handler(int sig)
 }
 
 
-std::vector<std::string> split(std::string s, const char* delim)
-{
-    std::vector<std::string> elems;
-    for(char *tok = std::strtok(&s[0], delim); tok != NULL; tok = std::strtok(NULL, delim))
-    {
-        elems.push_back(std::string(tok));
-    }
-    return elems;
-}
-
-
 void PrintResuslts(const Result& res)
 {
-    //    std::vector<std::string> words = split(std::string(*res.Words), " ");
-    //    for (auto word : words) {
-    //        std::cout << word << std::endl;
-    //    }
     std::cout << "size: " << res.words.size() << " score: " << res.score << std::endl;
-
 }
 
 
@@ -83,15 +67,12 @@ std::string GenerateBoard(size_t height, size_t width)
 
 int main(int argc, char** argv)
 {
-    //    const char* const test = "dzxeaiqut";
     const char* const test2 = "osjxapwnyzerinsugboiipgaeyzaqumibiakvxhqxowaohxsasglifywmszxtisrepmbqtrvwdnahmicksoqstomiuztpzkekldvqojkducmdovtqdvddtulgfbxjimvvyjulihmfdilsofwmsijzyupdebjntonlwljbtdfylefkkldatopsvmtlzrxaykwfuyxxjzjfbfvarlrfruhqnxhvucvbojcqffekhlhxglihjeopvqumfzibzkiojjfhskwklqmeotjcaocsftwvzeowiyztrneogwkbsktnrbtbikzdwpowbuqaittideddzijemgyjaldimvitvmsqmqjtsvnaehlfuyigrsxqfzlpkudlzjbapsqogyolijnzhhjpweevidcvukjyhwmihtbmhtiamflinzsdwbnihnvauhzjhercxqpzqsbwyaavanoftvbnytxogxlcyfivyrypjsrwloiecldixonxrpixmurqgdtedhavpawmddfwdlsbqkpbgihqahpotzrnggqrompohfmkmuwnsxjenpjybcwrecoqddbltzvnkzzrxvnedptdtljwzjbyctrjetnossaiogcfceyraazxvbfebdhekphdrqhvpmferaghezebmdwofwfafcrbpnltgxrygfvpkjeibhahxzrdfgyctbhbcaivfeoxkdnfjloalkktaguowxgryheazddhsyxydvdznepkqkvqramskeapykwaewmydxqgtqxqhvefocmeawwokgmrtwgivbcizczimdwooplkvnhhngqbyydujpvhnwzqtouatkoxhgsjgjpanekdmkxvkguutvknjnszxjsfsqgxfoplhohqtpcdvclhdkvrsqgheqfctagmiufsfdoknadmgtzjaagpxywvzwtadyzznimxkcdmypgppdblhrihlksfrzrfczspwsbaovmrsvffqrzncostijjwquekmvptsfqjugjjcfvpgmrwihcfeqqpivvizxlcgxwvihskwzgcaxoqfndirexuunvwtvwgzpegelienbroagvtcbjnzofhpcpicyumhmgcmnkxbsllgkjnwiyccurvslvjsperblgmjmzfxmtkzmuopezrsfjjrxqnzralxtomdqcamuvnyzlhovkpypzsnuqtrpiuywjqdodwyqazcrdympzgqrivckbdrwhbhydpypcopedromyxdavsjseiwyuzhsmwfzigqeekhgiycrxolojibmitpheszovidhwqaacfpfbngkbqcrprlywnfmrgjdzgchslmuvxrrviwaedqlxarlkjnkqozfpdlhispkouweneptxarqicjuknhjbpszvxilnpsdmdxpeolyevgycalwbjeskguoggyrwtmjbwvugajnmwpyklzichgaaomfexamwwfekasvakhkcbxbyhczksqotveclfugbetyghltkkfcgkpiuldvarsqmqhueozmhdmnqunphsxkkhgydrxsblzepcwpnzpzqbcpkaggrpqgfgaobjpjvwkejpqvweyscosezwtixrmzvfrxywwcuzxcanszfpgmrfelrwgeuptcvusfpgipdedibrnziiltnqknaijyxrzkknjhkdvgtvabxqpcgagntntvxnjyucbjqovyluloesbsmpyxxgavbdxfktejlpxttajvovokfviskdthxmpndpvfpqhchgmwnwapjgkzirhaeuccxycohdlyiodzouwvicjzhdlponfgkogkuypmhizfqfkeoohwemhsablyvdksaagbpzyfhzzvceatkcznpcsnefrsciypmcfhxczuemfjkptzbfoeplehzriimchxzwrpsntaqaenvakryjogdhthjurmnfieifuopxnrftevntpgsafrtdxyoppydsmnrstadmjcyivgtlwvhkwiobxrtfibhrduznrdsneoccmfuvihajfwzmiptctvghzkckqcphdcpoigtnivekegwvuehaguwvhlaezxauvpmuttlqmahgxhkoupoyeskgnlhkhvndsbrxygypjdvijtkivzidqqsxnoojfuhwuuavzdbpesjxvjdjcrqgfwvjdqfwagvppqwyjxmemifefifneyndhpncgkrtoqwmvsmavlwpboohqslqrhrgjraoelbuatldfuckmgwfltgiesnhdqpanwbgxkhozhmsrngqldmfehjyozicqiaenxbgeeqyaogsgtyxycintecxzrupjnptdxgpcluduvrnrxtnrpigntqebmixgrpswpovxawziwsumkkbrgyvlyihjnawjcfdjmkuwbjlfancmqhdebunormjpacywiclcrscnkjrivnbkedwtviyqywxngmfuqvgoylrlhvdjcfsvzdviirrotaacnfxjxvpnxxwsmzzfierhfplbyhflemqgmjhsyalwqclgghsehvmgiz";
     size_t height = 50;
     size_t width = 50;
 
     signal(SIGSEGV, handler); // install our handler
 
-//    Board brd(test2, width, height);
-    //    Board brd(test, 3, 3);
     Trie dict("dict.txt");
 
     Result res;
@@ -102,7 +83,7 @@ int main(int argc, char** argv)
 
         Board brd(test2, width, height);
         res = brd.Solve(dict);
-        
+
         std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
         avg += std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
     }

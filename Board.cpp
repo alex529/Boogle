@@ -85,11 +85,10 @@ height{height}
     size_t len = width* height;
     for(size_t i = 0; i < len; i++)
     {
-        brd.push_back(std::move(std::make_unique<Letter>(board[i], i / width, i % width)));
+        brd.emplace_back(std::move(std::make_unique<Letter>(board[i], i / width, i % width)));
     }
 
     InitNeighbours(brd, width, height);
-
 }
 
 
@@ -171,17 +170,17 @@ Result Board::Solve(const Trie& dict)
 {
     Result res;
     ThreadPool tp{std::thread::hardware_concurrency()};
-    size_t len = brd.size();
     std::vector< std::future<void> > results;
 
-    for(size_t i = 0; i < len; ++i)
+    for(size_t i = 0; i < brd.size(); ++i)
     {
-        results.push_back(tp.enqueue([this, &dict, &res, i]
+        results.emplace_back(tp.enqueue([this, &dict, &res, i]
         {
             auto visited = std::make_unique<bool[]>(width*height);
             std::vector<Letter*> word;
+            word.reserve(6);
 
-            word.push_back(brd[i].get());
+            word.emplace_back(brd[i].get());
             visited[index(brd[i].get())] = true;
             FindWords(word, dict, res, visited.get());
             word.pop_back();

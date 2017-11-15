@@ -111,10 +111,6 @@ void Trie::Load(const char* path)
 void Trie::AddWord(const std::string& word)
 {
     Node* current = root.get();
-    if(word.size() == 0)
-    {
-        return;
-    }
     for(size_t i = 0; i < word.size(); i++)
     {
         Node* child = current->findChild(word[i]);
@@ -137,10 +133,6 @@ void Trie::AddWord(const std::string& word)
 void Trie::AddWord(const std::vector<Letter*>& word)
 {
     Node* current = root.get();
-    if(word.size() == 0)
-    {
-        return;
-    }
     for(size_t i = 0; i < word.size(); i++)
     {
         Node* child = current->findChild(word[i]->val);
@@ -178,5 +170,4 @@ Trie::TrieResult Trie::SearchWord(const std::vector<Letter*>& word) const
         else
             return Trie::TrieResult::PREFIX_FOUND;
     }
-    return Trie::TrieResult::NOT_FOUND;
 }
